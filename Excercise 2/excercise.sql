@@ -6,12 +6,11 @@ FROM albums as a
     ORDER BY art.name;
 
 /* Question 2 */
-SELECT artists.Name as ArtistName, COUNT(albums.ArtistId) as AlbumCount, albums.Title as AlbumName
+SELECT artists.Name as ArtistName, albums.Title as AlbumName
 FROM artists
-JOIN albums
+LEFT JOIN albums
 ON (artists.ArtistId = albums.ArtistId)
-GROUP BY albums.Title
-HAVING AlbumCount >= 1
+GROUP BY AlbumName
 ORDER BY albums.Title DESC;
 
 /* Question 3*/
@@ -55,7 +54,7 @@ ORDER BY TrackID;
 /* Question 8*/
 SELECT employees.EmployeeId as 'Employee ID',
     (SELECT employees.FirstName || employees.LastName) AS 'Empyloyee Name',
-    employees.Title AS 'Empyloyee Title',
+    employees.Title AS 'Empyloyee Title',    
     employees.ReportsTo AS 'Manager ID',
     i.FirstName as 'Manager Name',
     i.Title as 'Manager Title'
